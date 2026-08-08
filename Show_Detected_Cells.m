@@ -1,6 +1,6 @@
 function Show_Detected_Cells (Image, Locations)
 
-%Desenhar bounding box na imagem original
+% Desenhar bounding box na imagem original
 if (~isempty(Locations))
     figure;
     imshow(Image);

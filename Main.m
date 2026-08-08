@@ -1,5 +1,9 @@
 %% Read Data
 clear;clc;close all;
+
+% Ao alterar a variável "Directory", também é necessário alterar na função
+% Read_Data a variável "subpastas"
+
 Directory = 'C:\Users\lm803\OneDrive\Ambiente de Trabalho\AIBi\2. Projeto\Train1';
 Vetor_de_Imagens = Read_Data(Directory);
 Size = length(Vetor_de_Imagens{2});
@@ -27,9 +31,9 @@ for i=1:Size
     [Counted_cells, TP, FP, FN, Recall, Precision, F_measure] = Segmentation_Evaluation(GT_Locations,Locations);
     Evaluation(i,:) = [Counted_cells, TP, FP, FN, Recall, Precision, F_measure];
     clc;
-    disp("Loading: " + i*100/Size+ "% ")
+    disp("Loading: " + i*100/Size + "% ")
 end
-%%
+
 Evaluation_Table = Evaluation_Table(Evaluation);
 disp (Evaluation_Table);
 
@@ -45,7 +49,8 @@ for i=1:Size
     GT_Locations = Cell_Location_GT.cellLocationsData;
     [Counted_cells, TP, FP, FN, Recall, Precision, F_measure] = Segmentation_Evaluation(GT_Locations,Locations);
     Evaluation(i,:) = [Counted_cells, TP, FP, FN, Recall, Precision, F_measure];
-
+    clc;
+    disp("Loading: " + i*100/Size+ "% ")
 end
 
 Evaluation_Table = Evaluation_Table(Evaluation);
@@ -64,7 +69,8 @@ for i=1:Size
     GT_Locations = Cell_Location_GT.cellLocationsData;
     [Counted_cells, TP, FP, FN, Recall, Precision, F_measure] = Segmentation_Evaluation(GT_Locations,Locations);
     Evaluation(i,:) = [Counted_cells, TP, FP, FN, Recall, Precision, F_measure];
-
+    clc;
+    disp("Loading: " + i*100/Size+ "% ")
 end
 
 Evaluation_Table = Evaluation_Table(Evaluation);
@@ -82,7 +88,8 @@ for i=1:Size
     GT_Locations = Cell_Location_GT.cellLocationsData;
     [Counted_cells, TP, FP, FN, Recall, Precision, F_measure] = Segmentation_Evaluation(GT_Locations,Locations);
     Evaluation(i,:) = [Counted_cells, TP, FP, FN, Recall, Precision, F_measure];
-
+    clc;
+    disp("Loading: " + i*100/Size+ "% ")
 end
 
 Evaluation_Table = Evaluation_Table(Evaluation);
@@ -92,8 +99,9 @@ disp (Evaluation_Table);
 
 index = 16;
 Image = Vetor_de_Imagens{2}{index};
-Mask_Morph = MorphologicalFilters(Image);
 Mask_GT = Vetor_de_Imagens{3}{index};
-Cells_GT = Vetor_de_Imagens{1}{index};
 Locations_Morph = Segmentation(Image, Mask_GT, "Morphological");
+Locations_Cluster = Segmentation(Image, Mask_GT, "Clustering");
 Show_Detected_Cells (Image, Locations_Morph)
+Show_Detected_Cells (Image, Locations_Cluster)
+
